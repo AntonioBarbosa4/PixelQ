@@ -1,0 +1,23 @@
+{
+  "name": "pixelq",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start:server": "bun run src/server.ts",
+    "start:worker": "bun run src/worker.ts",
+    "clean": "rm -rf dist && echo 'Done.'",
+    "build:server": "bun build --compile src/server.ts --outfile dist/server",
+    "build:worker": "bun build --compile src/worker.ts --outfile dist/worker"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "rabbitmq-client": "^5.0.5",
+    "zod": "^4.1.11"
+  }
+}
