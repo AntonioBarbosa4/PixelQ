@@ -1,0 +1,24 @@
+FROM oven/bun:1.2.22-alpine AS build
+
+WORKDIR /app
+
+COPY package.json bun.lock ./
+
+RUN bun install --frozen-lockfile
+
+COPY . .
+
+RUN bun run build:worker
+
+FROM build AS runner
+
+WORKDIR /app
+
+RUN addgroup -g 1001 -S appgroup && \
+  adduser -u 1001 -S appuser -G appgroup
+
+COPY --from=build --chown=appuser:appgroup /app/dist/worker ./worker
+
+USER appuser
+
+CMD ["./worker"]
