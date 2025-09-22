@@ -1,24 +1,30 @@
-FROM oven/bun:1.2.22-alpine AS build
+FROM oven/bun:1.2.22-alpine AS base
+
+FROM base AS deps
 
 WORKDIR /app
 
 COPY package.json bun.lock ./
 
-RUN bun install --frozen-lockfile
+RUN bun install --production
+
+FROM deps AS build
+
+WORKDIR /app
 
 COPY . .
 
 RUN bun run build:worker
 
-FROM build AS runner
+FROM oven/bun:1.2.22-alpine AS runner
 
 WORKDIR /app
 
 RUN addgroup -g 1001 -S appgroup && \
-  adduser -u 1001 -S appuser -G appgroup
+  adduser -u 1001 -S api -G appgroup
 
-COPY --from=build --chown=appuser:appgroup /app/dist/worker ./worker
+COPY --from=build --chown=api:appgroup /app/dist/worker ./worker
 
-USER appuser
+USER api
 
 CMD ["./worker"]

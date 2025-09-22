@@ -7,8 +7,8 @@
     "start:server": "bun run src/server.ts",
     "start:worker": "bun run src/worker.ts",
     "clean": "rm -rf dist && echo 'Done.'",
-    "build:server": "bun build --compile src/server.ts --outfile dist/server",
-    "build:worker": "bun build --compile src/worker.ts --outfile dist/worker"
+    "build:server": "bun build --compile --minify --target=bun src/server.ts --outfile dist/server",
+    "build:worker": "bun build --compile --minify --target=bun src/worker.ts --outfile dist/worker"
   },
   "devDependencies": {
     "@types/bun": "latest"
