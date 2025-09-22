@@ -6,7 +6,7 @@
 [![Tech: RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=white)](https://www.rabbitmq.com/)
 [![Tech: Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 
-A simple proof-of-concept for an asynchronous video processing system, built with Node.js, RabbitMQ, and Docker.
+A simple proof-of-concept for an asynchronous video processing system, built with Bun, RabbitMQ, and Docker.
 
 ## 📖 About The Project
 
